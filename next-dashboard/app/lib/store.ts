@@ -179,25 +179,15 @@ export const useStore = create<StoreState>()(
       activeStoreId: 'sarah', // Default
       stores: MOCK_STORES,   // Initialize with mock data
       merchant: {
-        user: {
-          id: 'mock-user-123',
-          name: 'Sarah Jenkins',
-          email: 'sarah@boutique.com',
-          role: 'owner',
-          authMethod: 'email'
-        },
-        org: {
-          name: "Sarah's Boutique",
-          industry: "Fashion",
-          contactEmail: "sarah@boutique.com"
-        },
+        user: null,
+        org: null,
         branding: {
           primaryColor: 'forest-contrast',
           brandVoice: 'Professional, Efficient, Secure',
           brandGuidelines: ''
         },
-        verificationStatus: 'verified',
-        isOnboarded: true,
+        verificationStatus: 'unverified',
+        isOnboarded: false,
       },
       isLoginModalOpen: false,
       setLoginModalOpen: (open) => set({ isLoginModalOpen: open }),
@@ -382,7 +372,7 @@ export const useStore = create<StoreState>()(
       }),
     }),
     {
-      name: 'halo-store-storage',
+      name: 'commercehub-store-storage',
     }
   )
 );

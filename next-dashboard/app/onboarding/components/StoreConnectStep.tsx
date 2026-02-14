@@ -107,7 +107,7 @@ export const StoreConnectStep: React.FC<StoreConnectStepProps> = ({ onBack, onCo
       });
 
       setStatus("injecting");
-      addLog("💉 Generatng WebMCP Adapter...");
+      addLog("💉 Generating WebMCP Adapter...");
       await new Promise(r => setTimeout(r, 1000));
 
       setStatus("complete");

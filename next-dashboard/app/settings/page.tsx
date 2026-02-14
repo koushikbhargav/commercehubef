@@ -4,12 +4,23 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, RefreshCw, Save } from 'lucide-react';
 
+import { useStore } from '@/app/lib/store';
+
 export default function Settings() {
   const router = useRouter();
+  const { getActiveStore } = useStore();
+  const store = getActiveStore();
+  const [isHydrated, setIsHydrated] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  if (!isHydrated) return null;
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
-      <button 
+    <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <button
         onClick={() => router.push('/dashboard')}
         className="flex items-center text-sm text-slate-500 hover:text-slate-900 mb-2 transition-colors"
       >
@@ -37,15 +48,15 @@ export default function Settings() {
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                <span className="text-green-700 font-bold">S</span>
+                <span className="text-green-700 font-bold">{store.name.charAt(0)}</span>
               </div>
               <div>
-                <p className="font-medium text-slate-900">boutique-sarah.myshopify.com</p>
-                <p className="text-sm text-slate-500">Shopify Store</p>
+                <p className="font-medium text-slate-900">{store.domain || store.id}</p>
+                <p className="text-sm text-slate-500 capitalize">{store.platform} Store</p>
               </div>
             </div>
             <div className="text-right">
-              <p className="text-xs text-slate-500 mb-1">Last synced: 2 minutes ago</p>
+              <p className="text-xs text-slate-500 mb-1">Last synced: {store.apiConfig?.lastSync ? new Date(store.apiConfig.lastSync).toLocaleTimeString() : 'Just now'}</p>
               <button className="flex items-center text-xs font-medium text-blue-600 hover:text-blue-700">
                 <RefreshCw className="w-3 h-3 mr-1" /> Sync Now
               </button>
@@ -68,20 +79,20 @@ export default function Settings() {
           <h3 className="font-semibold text-slate-900">Product Sync Settings</h3>
         </div>
         <div className="p-6 space-y-4">
-          <Checkbox 
-            label="Auto-sync inventory" 
-            desc="Automatically update stock levels every 5 minutes" 
-            checked 
+          <Checkbox
+            label="Auto-sync inventory"
+            desc="Automatically update stock levels every 5 minutes"
+            checked={store.apiConfig?.enabled}
           />
-          <Checkbox 
-            label="Include out-of-stock products" 
-            desc="Let agents see products even if they are currently unavailable" 
-            checked 
+          <Checkbox
+            label="Include out-of-stock products"
+            desc="Let agents see products even if they are currently unavailable"
+            checked
           />
-          <Checkbox 
-            label="Sync product variants" 
-            desc="Include size, color, and material options" 
-            checked 
+          <Checkbox
+            label="Sync product variants"
+            desc="Include size, color, and material options"
+            checked
           />
           <div className="pt-4 border-t border-slate-100">
             <label className="flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">
@@ -92,9 +103,9 @@ export default function Settings() {
               </div>
             </label>
             <div className="mt-2 ml-7">
-               <select className="block w-full max-w-xs pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md disabled:bg-slate-100 disabled:text-slate-400" disabled>
-                 <option>Select collections...</option>
-               </select>
+              <select className="block w-full max-w-xs pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md disabled:bg-slate-100 disabled:text-slate-400" disabled>
+                <option>Select collections...</option>
+              </select>
             </div>
           </div>
         </div>
@@ -106,29 +117,29 @@ export default function Settings() {
           <h3 className="font-semibold text-slate-900">Agent Permissions</h3>
         </div>
         <div className="p-6 space-y-4">
-          <Checkbox 
-            label="Allow product search" 
-            desc="Agents can search and filter your catalog" 
-            checked 
+          <Checkbox
+            label="Allow product search"
+            desc="Agents can search and filter your catalog"
+            checked
           />
-          <Checkbox 
-            label="Allow price checking" 
-            desc="Agents can retrieve real-time pricing" 
-            checked 
+          <Checkbox
+            label="Allow price checking"
+            desc="Agents can retrieve real-time pricing"
+            checked
           />
-          <Checkbox 
-            label="Allow inventory checks" 
-            desc="Agents can see stock levels" 
-            checked 
+          <Checkbox
+            label="Allow inventory checks"
+            desc="Agents can see stock levels"
+            checked
           />
-          <Checkbox 
-            label="Allow purchase completion" 
-            desc="Agents can create orders" 
-            checked 
+          <Checkbox
+            label="Allow purchase completion"
+            desc="Agents can create orders"
+            checked
           />
-          <Checkbox 
-            label="Require approval for orders >$500" 
-            desc="Flag high-value transactions for manual review" 
+          <Checkbox
+            label="Require approval for orders >$500"
+            desc="Flag high-value transactions for manual review"
           />
         </div>
       </div>
@@ -142,7 +153,7 @@ export default function Settings() {
           <div className="flex items-start gap-3">
             <input type="radio" name="payment_mode" defaultChecked className="mt-1 w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500" />
             <div className="flex-1">
-              <label className="block text-sm font-medium text-slate-900">Halo Payments (Active)</label>
+              <label className="block text-sm font-medium text-slate-900">CommerceHub Payments (Active)</label>
               <p className="text-xs text-slate-500 mt-1 mb-2">Virtual cards: Enabled</p>
               <button className="text-xs font-medium text-blue-600 hover:text-blue-700">View Transaction History</button>
             </div>
@@ -163,10 +174,10 @@ export default function Settings() {
 function Checkbox({ label, desc, checked }: { label: string, desc: string, checked?: boolean }) {
   return (
     <label className="flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">
-      <input 
-        type="checkbox" 
+      <input
+        type="checkbox"
         defaultChecked={checked}
-        className="mt-1 w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500" 
+        className="mt-1 w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500"
       />
       <div>
         <span className="block text-sm font-medium text-slate-900">{label}</span>

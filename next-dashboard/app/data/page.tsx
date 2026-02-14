@@ -1,14 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { 
-  Database, 
-  Settings2, 
-  Table, 
-  Search, 
-  Plus, 
-  MoreVertical, 
-  RefreshCcw, 
+import {
+  Database,
+  Settings2,
+  Table,
+  Search,
+  Plus,
+  MoreVertical,
+  RefreshCcw,
   ExternalLink,
   Filter,
   ArrowRight,
@@ -24,6 +24,13 @@ type Tab = 'items' | 'connection' | 'mapping';
 
 export default function DataManagement() {
   const [activeTab, setActiveTab] = useState<Tab>('items');
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  React.useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  if (!isHydrated) return null;
 
   return (
     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
@@ -55,11 +62,10 @@ export default function DataManagement() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as Tab)}
-            className={`flex items-center gap-3 py-6 transition-all text-[9px] font-bold uppercase tracking-[0.3em] relative ${
-              activeTab === tab.id 
-                ? 'text-deep-jungle' 
-                : 'text-forest-contrast/20 hover:text-deep-jungle/60'
-            }`}
+            className={`flex items-center gap-3 py-6 transition-all text-[9px] font-bold uppercase tracking-[0.3em] relative ${activeTab === tab.id
+              ? 'text-deep-jungle'
+              : 'text-forest-contrast/20 hover:text-deep-jungle/60'
+              }`}
           >
             <tab.icon className={`w-3.5 h-3.5 ${activeTab === tab.id ? 'text-agentic-lime' : ''}`} />
             {tab.label}
@@ -101,8 +107,8 @@ function ItemsTab() {
       <div className="flex items-center justify-between gap-8">
         <div className="relative flex-1 max-w-lg">
           <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-forest-contrast/30" />
-          <input 
-            type="text" 
+          <input
+            type="text"
             placeholder="FILTER REPOSITORY..."
             className="halofy-input !pl-10 uppercase tracking-widest text-[10px]"
           />
@@ -139,23 +145,21 @@ function ItemsTab() {
                   </td>
                   <td className="px-10 py-8 text-right font-mono text-deep-jungle font-bold">{item.stock}</td>
                   <td className="px-10 py-8">
-                    <span className={`px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest rounded-sm ${
-                      item.stock > 10 ? 'bg-agentic-lime text-deep-jungle' :
+                    <span className={`px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest rounded-sm ${item.stock > 10 ? 'bg-agentic-lime text-deep-jungle' :
                       item.stock > 0 ? 'bg-forest-contrast/10 text-forest-contrast/60' :
-                      'bg-red-500/10 text-red-600'
-                    }`}>
+                        'bg-red-500/10 text-red-600'
+                      }`}>
                       {item.stock > 10 ? 'Synchronized' : item.stock > 0 ? 'Depleting' : 'Disconnected'}
                     </span>
                   </td>
                   <td className="px-10 py-8 text-right">
-                    <button 
+                    <button
                       onClick={() => handleSimulateOrder(item)}
                       disabled={item.stock <= 0 || isSyncing === item.id}
-                      className={`text-[9px] font-bold uppercase tracking-[0.3em] px-5 py-2.5 transition-all border ${
-                        isSyncing === item.id 
-                          ? 'bg-agentic-lime border-agentic-lime text-deep-jungle' 
-                          : 'bg-transparent border-forest-contrast/20 text-forest-contrast/60 hover:border-deep-jungle hover:text-deep-jungle'
-                      } disabled:opacity-10`}
+                      className={`text-[9px] font-bold uppercase tracking-[0.3em] px-5 py-2.5 transition-all border ${isSyncing === item.id
+                        ? 'bg-agentic-lime border-agentic-lime text-deep-jungle'
+                        : 'bg-transparent border-forest-contrast/20 text-forest-contrast/60 hover:border-deep-jungle hover:text-deep-jungle'
+                        } disabled:opacity-10`}
                     >
                       {isSyncing === item.id ? 'Processing...' : 'Simulate Loop'}
                     </button>
@@ -206,10 +210,10 @@ function ConnectionTab() {
             <div className="pb-10 border-b border-forest-contrast/5">
               <p className="text-[9px] font-bold text-forest-contrast/30 uppercase tracking-[0.4em] mb-4">Node Identity</p>
               <p className="text-sm font-mono text-deep-jungle truncate bg-forest-contrast/5 p-4 border-l-2 border-agentic-lime">
-                {isApi ? store.apiConfig!.url : isSheets ? 'REDACTED_G_CLOUD_UCP' : 'HALO_INTERNAL_FS'}
+                {isApi ? store.apiConfig!.url : isSheets ? 'REDACTED_G_CLOUD_UCP' : 'COMMERCEHUB_INTERNAL_FS'}
               </p>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-10">
               <div>
                 <p className="text-[9px] font-bold text-forest-contrast/30 uppercase tracking-[0.4em] mb-4">Heartbeat</p>
@@ -232,7 +236,7 @@ function ConnectionTab() {
           </div>
         </div>
       </div>
-      
+
       <button className="w-full p-8 border border-forest-contrast/10 flex items-center justify-between group hover:bg-agentic-lime transition-all">
         <div className="flex items-center gap-6">
           <RefreshCcw className="w-6 h-6 text-forest-contrast/40 group-hover:text-deep-jungle" />
@@ -268,17 +272,17 @@ function MappingTab() {
             {Object.entries(mappings).map(([mcp, mine], i) => (
               <tr key={i} className="hover:bg-agentic-lime/[0.02] transition-colors">
                 <td className="px-12 py-10">
-                   <p className="text-[8px] font-bold text-forest-contrast/30 uppercase tracking-[0.5em] mb-4">Original Key</p>
-                   <p className="font-bold text-deep-jungle uppercase tracking-[0.1em]">{mine}</p>
+                  <p className="text-[8px] font-bold text-forest-contrast/30 uppercase tracking-[0.5em] mb-4">Original Key</p>
+                  <p className="font-bold text-deep-jungle uppercase tracking-[0.1em]">{mine}</p>
                 </td>
                 <td className="px-4 py-10">
-                   <ArrowRight className="w-4 h-4 text-agentic-lime" />
+                  <ArrowRight className="w-4 h-4 text-agentic-lime" />
                 </td>
                 <td className="px-12 py-10">
-                   <p className="text-[8px] font-bold text-forest-contrast/30 uppercase tracking-[0.5em] mb-4">Halo Protocol</p>
-                   <code className="bg-agentic-lime text-deep-jungle px-2 py-1 text-[10px] font-bold uppercase tracking-widest">
-                      {mcp}
-                   </code>
+                  <p className="text-[8px] font-bold text-forest-contrast/30 uppercase tracking-[0.5em] mb-4">CommerceHub Protocol</p>
+                  <code className="bg-agentic-lime text-deep-jungle px-2 py-1 text-[10px] font-bold uppercase tracking-widest">
+                    {mcp}
+                  </code>
                 </td>
               </tr>
             ))}
@@ -292,7 +296,7 @@ function MappingTab() {
           </tbody>
         </table>
         <div className="px-12 py-10 bg-forest-contrast/5 border-t border-forest-contrast/10 flex justify-end">
-           <button className="btn-primary">Initialize Linkage</button>
+          <button className="btn-primary">Initialize Linkage</button>
         </div>
       </div>
     </div>

@@ -1,32 +1,45 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans:
-    "PP Neue Montreal", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display:
-    "FK Raster", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
-  --font-mono: "JetBrains Mono", monospace;
+/* ============================================
+   HALO DESIGN SYSTEM — Foundation Tokens
+   Tailwind v4 CSS-first configuration
+   ============================================ */
 
-  /* Halofy.ai Exact Palette */
-  --color-cyber-cream: #f4f7ee;
-  --color-deep-jungle: #0d1f18;
-  --color-agentic-lime: #274029;
-  --color-mint-glow: #94ffaf;
-  --color-forest-contrast: #274029;
-  --color-glow-blue: #6bb3ff;
-  --color-midnight: #000c38;
-  --color-accent-green: #00c38a;
-  --color-sage-light: #d5daad;
-  --color-forest-secondary: #316196;
-  /* Using a blue-ish secondary or dark green? Let's use a darker forest green */
-  --color-forest-secondary: #1a2e1c;
+@theme {
+  /* Typography */
+  --font-sans: "PP Neue Montreal", system-ui, sans-serif;
+  --font-serif: "FK Raster Smooth", ui-monospace, monospace;
+  --font-display: "FK Raster Smooth", ui-monospace, monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+
+  /* Radius — sharp, technical */
+  --radius-sm: 0.0625rem;
+  --radius-md: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 9999px;
+
+  /* Palette — static brand colors */
+  --color-forest: #274029;
+  --color-olive: #A3BD6A;
+  --color-sage-cream: #F4F7EE;
+  --color-cream: #FBFDE2;
+  --color-deep-jungle: #0D1F18;
+  --color-sage-light: #D5DAAD;
+  --color-sage-border: #CBD5A0;
+  --color-card-white: #FDFDFD;
 }
+
+/* ============================================
+   FONT FACES
+   ============================================ */
 
 @font-face {
   font-family: "FK Raster Smooth";
   src: url("/fonts/FK_Raster_Roman_Compact_Smooth.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -34,6 +47,7 @@
   src: url("/fonts/PP_Neue_Montreal_Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -41,107 +55,289 @@
   src: url("/fonts/PP_Neue_Montreal_Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
-}
-
-:root {
-  --background: #f4f7ee;
-  --foreground: #011f18;
-  --font-fk-raster: "FK Raster Smooth", monospace;
-  --font-neue-montreal: "PP Neue Montreal", sans-serif;
-
-  /* Footer Variables */
-  --footer-bg: #000000;
-  --page-width: 1280px;
-  --padding: clamp(1.5rem, 6vw, 4rem);
-  --space: 2rem;
-}
-
-body {
-  font-family: var(--font-neue-montreal);
-  background-color: var(--color-cyber-cream);
-  color: var(--color-deep-jungle);
-  @apply antialiased overflow-x-hidden;
-  position: relative;
+  font-display: swap;
 }
 
 /* ============================================
-   GLOBAL DITHER NOISE OVERLAY
+   CSS CUSTOM PROPERTIES — Light Mode (default)
    ============================================ */
+
+:root {
+  --background: #F4F7EE;
+  --foreground: #0D1F18;
+  --card: #FDFDFD;
+  --card-foreground: #0D1F18;
+  --border: #CBD5A0;
+  --input: #CBD5A0;
+  --ring: #A3BD6A;
+  --accent: #A3BD6A;
+  --accent-foreground: #0D1F18;
+  --brand: #274029;
+  --brand-foreground: #FBFDE2;
+  --muted: #D5DAAD;
+  --muted-foreground: #5a6b4a;
+  --cream: #FBFDE2;
+  --destructive: #dc2626;
+  --destructive-foreground: #fef2f2;
+
+  /* Radius — 2px sharp technical */
+  --radius: 0.125rem;
+
+  /* Shadows — flat, border-based */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+
+  /* Font shortcuts */
+  --font-fk-raster: "FK Raster Smooth", ui-monospace, monospace;
+  --font-neue-montreal: "PP Neue Montreal", system-ui, sans-serif;
+}
+
+/* ============================================
+   CSS CUSTOM PROPERTIES — Dark Mode
+   ============================================ */
+
+.dark {
+  --background: #000000;
+  --foreground: #FBFDE2;
+  --card: #0A0A0A;
+  --card-foreground: #FBFDE2;
+  --border: rgba(251, 253, 226, 0.15);
+  --input: rgba(251, 253, 226, 0.15);
+  --ring: #FBFDE2;
+  --accent: #FBFDE2;
+  --accent-foreground: #000000;
+  --brand: #FBFDE2;
+  --brand-foreground: #000000;
+  --muted: #0A0A0A;
+  --muted-foreground: rgba(251, 253, 226, 0.55);
+  --cream: #FBFDE2;
+  --destructive: #ef4444;
+  --destructive-foreground: #1a0000;
+
+  /* Radius — softer in dark */
+  --radius: 0.625rem;
+
+  /* Shadows — real elevation */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 3px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+html {
+  font-family: var(--font-neue-montreal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-neue-montreal);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ============================================
+   DITHER NOISE OVERLAY
+   ============================================ */
+
 .dither-noise-overlay {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 40;
+  z-index: 1000;
   mix-blend-mode: overlay;
-  opacity: 0.035;
+  opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 200px 200px;
 }
 
 /* ============================================
-   DITHER TRANSITION - Sage to Black
+   UTILITY CLASSES
    ============================================ */
-.dither-transition {
+
+/* Hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Corner markers — decorative L-bracket corners */
+.corner-markers {
   position: relative;
-  width: 100%;
-  height: 160px;
-  /* Matched to SVG height */
-  margin-top: -1px;
-  background-color: var(--background);
 }
 
-.dither-transition-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* Blue Vignette Glow */
-body::after {
+.corner-markers::before,
+.corner-markers::after {
   content: "";
-  position: fixed;
-  inset: 0;
-  box-shadow: inset 0 0 200px rgba(107, 179, 255, 0.1);
+  position: absolute;
+  width: 12px;
+  height: 12px;
   pointer-events: none;
-  z-index: 50;
+  z-index: 1;
 }
 
-h1,
-h2,
-h3,
+.corner-markers::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid var(--foreground);
+  border-left: 1px solid var(--foreground);
+}
+
+.corner-markers::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid var(--foreground);
+  border-right: 1px solid var(--foreground);
+}
+
+/* Font display shortcut */
 .font-display {
   font-family: var(--font-fk-raster);
-  @apply tracking-tight uppercase leading-none;
 }
 
-/* Exact Halofy Button Replication */
+/* ============================================
+   LEGACY COMPAT — classes used by existing pages
+   Keep these so existing page.tsx files don't break
+   ============================================ */
+
+@theme {
+  /* Legacy color aliases for existing Tailwind classes */
+  --color-cyber-cream: #F4F7EE;
+  --color-deep-jungle: #0D1F18;
+  --color-agentic-lime: #D4FF00;
+  --color-forest-contrast: #274029;
+  --color-mint-glow: #94ffaf;
+}
+
 .btn-primary {
-  @apply px-6 py-3 bg-forest-contrast text-cyber-cream font-bold rounded-lg hover:bg-forest-contrast hover:text-cyber-cream transition-all duration-300 uppercase tracking-[0.3em] text-[10px] border border-forest-contrast/5;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background-color: var(--brand);
+  color: var(--cream);
+  font-family: var(--font-neue-montreal);
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  border: 1px solid var(--brand);
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  opacity: 0.88;
 }
 
 .btn-secondary {
-  @apply px-6 py-3 bg-transparent border border-forest-contrast/10 text-deep-jungle font-bold rounded-lg hover:bg-forest-contrast hover:text-cyber-cream transition-all duration-300 uppercase tracking-[0.3em] text-[10px];
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background-color: transparent;
+  color: var(--foreground);
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
-/* High-Contrast Readability Patch */
+.btn-secondary:hover {
+  background-color: var(--brand);
+  color: var(--cream);
+}
+
+/* Legacy card */
+.halofy-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  transition: border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.halofy-card:hover {
+  border-color: var(--accent);
+}
+
+/* Legacy input */
+.halofy-input {
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 0;
+  outline: none;
+  transition: border-color 0.2s ease;
+  font-size: 0.875rem;
+  color: var(--foreground);
+}
+
+.halofy-input:focus {
+  border-color: var(--accent);
+}
+
+/* Legacy mesh container */
+.halofy-mesh-container {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--background);
+  min-height: 100vh;
+}
+
+/* Label contrast */
 .text-label-contrast {
-  color: var(--color-forest-contrast);
-  @apply font-bold uppercase tracking-[0.3em] text-[10px];
+  color: var(--brand);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 10px;
+}
+
+/* ============================================
+   FOOTER (Legacy — used by current layout.tsx)
+   ============================================ */
+
+:root {
+  --footer-bg: #000000;
+  --page-width: 1280px;
+  --padding: clamp(1.5rem, 6vw, 4rem);
+  --space: 2rem;
 }
 
 @layer components {
-
-  /* ============================================
-     FOOTER (Halofy.ai Reference)
-     ============================================ */
   .site-footer {
     background-color: var(--footer-bg);
     color: #ffffff;
-    padding: var(--space) var(--padding);
+    padding: calc(var(--space) * 2) var(--padding) calc(var(--space) * 1);
     position: relative;
     overflow: hidden;
+    min-height: 350px;
+  }
+
+  @media (min-width: 769px) {
+    .site-footer {
+      padding: calc(var(--space) * 3) var(--padding) calc(var(--space) * 2);
+      min-height: 600px;
+    }
   }
 
   .footer-top {
@@ -222,23 +418,31 @@ h3,
     opacity: 1;
   }
 
-  /* Large Footer Logo Watermark - Edge to Edge */
   .footer-logo-container {
     display: flex;
     justify-content: center;
-    margin-top: calc(var(--space) * 3);
+    margin-top: calc(var(--space) * 1.5);
     padding: 0;
     position: relative;
     z-index: 1;
-    width: 100vw;
-    margin-left: calc(-1 * var(--padding));
-    margin-right: calc(-1 * var(--padding));
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
     bottom: 0;
-    /* Align to bottom */
+  }
+
+  @media (min-width: 769px) {
+    .footer-logo-container {
+      margin-top: calc(var(--space) * 3);
+      width: 100vw;
+      margin-left: calc(-1 * var(--padding));
+      margin-right: calc(-1 * var(--padding));
+    }
   }
 
   .footer-logo-watermark {
     width: 100%;
+    max-width: 100%;
     height: auto;
     color: rgba(255, 255, 255, 0.15);
   }
@@ -259,39 +463,18 @@ h3,
   }
 }
 
-/* Minimalist Inputs */
-.halofy-input {
-  @apply bg-transparent border-b border-forest-contrast/20 py-2 focus:border-forest-contrast outline-none transition-all font-medium text-sm text-deep-jungle;
+/* Dither transition (legacy) */
+.dither-transition {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  margin-top: -1px;
+  background-color: var(--background);
 }
 
-/* Layout Elements */
-.halofy-card {
-  @apply bg-transparent border border-forest-contrast/5 p-6 hover:border-forest-contrast/10 transition-all relative overflow-hidden;
-}
-
-/* Dither Graphics & Animations */
-@keyframes dither-float {
-  0% {
-    background-position: 0% 0%;
-  }
-
-  50% {
-    background-position: 100% 100%;
-  }
-
-  100% {
-    background-position: 0% 0%;
-  }
-}
-
-.dither-mesh {
-  background-image: radial-gradient(circle at 1px 1px,
-      rgba(13, 31, 24, 0.1) 1px,
-      transparent 0);
-  background-size: 12px 12px;
-  animation: dither-float 60s infinite linear;
-}
-
-.halofy-mesh-container {
-  @apply relative overflow-hidden bg-cyber-cream min-h-screen;
+.dither-transition-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
 }

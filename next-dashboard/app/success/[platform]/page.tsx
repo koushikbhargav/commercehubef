@@ -11,6 +11,13 @@ import { generateAndDownloadServer } from '@/app/lib/generator';
 export default function DeploymentSuccess() {
   const router = useRouter();
   const { getActiveStore } = useStore();
+  // Handle hydration to ensure we have the correct store data
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  React.useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
   const store = getActiveStore();
   const [downloading, setDownloading] = useState(false);
   const [activeAgent, setActiveAgent] = useState('claude');
@@ -24,6 +31,8 @@ export default function DeploymentSuccess() {
       colors: ['#000000', '#ffffff', '#555555']
     });
   }, []);
+
+  if (!isHydrated) return null;
 
   const handleDownload = async () => {
     setDownloading(true);

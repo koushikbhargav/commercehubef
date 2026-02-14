@@ -3,6 +3,7 @@ import "./globals.css";
 import { Agentation } from "agentation";
 import { SyncProvider } from "./lib/SyncProvider";
 import { AuthProvider } from "./components/AuthProvider";
+import { ThemeProvider } from "./components/ThemeProvider";
 import { DitherWave } from "./components/DitherWave";
 import { AppHeader } from "./components/AppHeader";
 
@@ -30,11 +31,13 @@ export default function RootLayout({
           <AppHeader />
 
           <main className="max-w-7xl mx-auto px-6 py-12 relative z-10">
-            <AuthProvider>
-              <SyncProvider>
-                {children}
-              </SyncProvider>
-            </AuthProvider>
+            <ThemeProvider>
+              <AuthProvider>
+                <SyncProvider>
+                  {children}
+                </SyncProvider>
+              </AuthProvider>
+            </ThemeProvider>
           </main>
 
           <DitherWave />
