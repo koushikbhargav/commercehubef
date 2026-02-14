@@ -37,7 +37,7 @@ export function PublicLayout({ children, className = "" }: PublicLayoutProps) {
             <HaloButton
               variant="ghost"
               size="sm"
-              onClick={() => router.push("/dashboard")}
+              onClick={() => router.push("/demo/dashboard")}
             >
               Console
             </HaloButton>

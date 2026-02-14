@@ -23,24 +23,17 @@ export function AppHeader() {
           </Link>
 
 
-          <div className="flex items-center gap-5">
-            <button
-              onClick={() => router.push(merchant.isOnboarded ? "/dashboard" : "/onboarding")}
-              className="hidden sm:block text-[9px] font-bold uppercase tracking-widest text-deep-jungle hover:text-agentic-lime transition-colors"
-            >
-              Console
-            </button>
-            {!merchant.user ? (
+          {merchant.user && (
+            <div className="flex items-center gap-5">
               <button
-                onClick={() => router.push("/onboarding?reset=true")}
-                className="btn-primary"
+                onClick={() => router.push("/demo/dashboard")}
+                className="hidden sm:block text-[9px] font-bold uppercase tracking-widest text-deep-jungle hover:text-agentic-lime transition-colors"
               >
-                Onboard
+                Console
               </button>
-            ) : (
               <UserProfile />
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </header>
       <LoginModal />

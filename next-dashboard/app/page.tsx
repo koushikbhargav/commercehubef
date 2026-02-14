@@ -1,233 +1,105 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useRouter } from "next/navigation";
-import {
-  ShoppingBag,
-  Database,
-  ArrowRight,
-  Sparkles,
-  UploadCloud,
-  ShieldCheck,
-  Zap,
-  BarChart3,
-  MessageSquare,
-  UtensilsCrossed,
-  Store,
-  Scissors,
-  Briefcase,
-} from "lucide-react";
-import { useStore } from "./lib/store";
-import { useEffect } from "react";
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { ArrowRight, Check, Sparkles } from 'lucide-react';
 
-const UseCase = ({ icon: Icon, text }: { icon: any; text: string }) => (
-  <div className="flex items-center gap-3 p-4 bg-transparent border border-forest-contrast/10 rounded-xl hover:border-forest-contrast transition-all group">
-    <div className="p-2 bg-forest-contrast/5 rounded-lg group-hover:bg-forest-contrast group-hover:text-cyber-cream transition-colors">
-      <Icon className="w-5 h-5 text-deep-jungle/60 group-hover:text-cyber-cream" />
-    </div>
-    <span className="text-[10px] font-bold uppercase tracking-widest text-deep-jungle/70">{text}</span>
-  </div>
-);
+export default function WaitlistPage() {
+    const [email, setEmail] = useState('');
+    const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-const PathCard = ({
-  title,
-  subtitle,
-  features,
-  cta,
-  primary,
-  onClick,
-}: any) => (
-  <div
-    className={`w-full flex flex-col p-8 rounded-2xl border transition-all duration-300 hover:shadow-2xl ${primary ? "border-forest-contrast/50 bg-forest-contrast/5" : "border-forest-contrast/10 bg-transparent hover:border-forest-contrast/20"}`}
-  >
-    <div className="flex items-center gap-3 mb-4">
-      <div
-        className={`w-12 h-12 rounded-xl flex items-center justify-center ${primary ? "bg-forest-contrast text-cyber-cream" : "bg-forest-contrast/5 text-deep-jungle"}`}
-      >
-        {primary ? (
-          <Database className="w-6 h-6" />
-        ) : (
-          <ShoppingBag className="w-6 h-6" />
-        )}
-      </div>
-      <div>
-        <h3 className="text-xl font-display uppercase tracking-tight text-deep-jungle leading-none">
-          {title}
-        </h3>
-        {primary && (
-          <span className="text-[8px] font-bold bg-forest-contrast/20 text-deep-jungle px-2 py-0.5 rounded-full uppercase tracking-widest mt-1 inline-block">
-            Primary Path
-          </span>
-        )}
-      </div>
-    </div>
-    <p className="text-forest-contrast text-[11px] font-medium mb-8 leading-relaxed uppercase tracking-tight">{subtitle}</p>
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email) return;
 
-    <div className="space-y-3 mb-10 overflow-hidden">
-      {features.map((f: string, i: number) => (
-        <div key={i} className="flex items-center gap-2.5 text-deep-jungle/70">
-          <div
-            className={`w-1 h-1 rounded-full ${primary ? "bg-agentic-lime" : "bg-forest-contrast/20"}`}
-          />
-          <span className="text-[10px] font-bold uppercase tracking-tight">{f}</span>
+        setLoading(true);
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        setLoading(false);
+        setSubmitted(true);
+    };
+
+    return (
+        <div className="min-h-screen bg-[#050505] text-white flex flex-col relative overflow-hidden font-sans selection:bg-agentic-lime selection:text-deep-jungle">
+
+            {/* Background Ambience */}
+            {/* Background Ambience Removed */}
+
+            {/* Header Removed */}
+
+            {/* Main Content */}
+            <main className="flex-1 relative z-10 flex flex-col items-center justify-center text-center px-6 pb-20">
+
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[9px] font-bold uppercase tracking-[0.2em] text-agentic-lime mb-10 shadow-[0_0_20px_rgba(202,255,51,0.1)]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-agentic-lime animate-pulse" />
+                    Early Access
+                </div>
+
+                {/* Hero Text */}
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-display tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 mb-8 max-w-5xl mx-auto leading-[0.9]">
+                    The API for the <br />
+                    <span className="text-agentic-lime">Agentic Economy</span>
+                </h1>
+
+                <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed mb-12 font-light">
+                    Turn any inventory into an AI-native interface. <br className="hidden md:block" />
+                    Let autonomous agents discover, query, and purchase your products.
+                </p>
+
+                {/* Form */}
+                <div className="w-full max-w-md mx-auto">
+                    {submitted ? (
+                        <div className="flex flex-col items-center animate-in fade-in zoom-in duration-500">
+                            <div className="w-16 h-16 bg-agentic-lime/10 rounded-full flex items-center justify-center mb-4 border border-agentic-lime/20">
+                                <Check className="w-8 h-8 text-agentic-lime" />
+                            </div>
+                            <h3 className="text-xl font-display text-white mb-2">You're on the list.</h3>
+                            <p className="text-sm text-white/40">We'll notify you when early access opens.</p>
+                            <button
+                                onClick={() => setSubmitted(false)}
+                                className="mt-6 text-[10px] font-mono uppercase tracking-widest text-white/30 hover:text-white transition-colors"
+                            >
+                                Reset
+                            </button>
+                        </div>
+                    ) : (
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-4 relative">
+                            <div className="relative group">
+                                <input
+                                    type="email"
+                                    placeholder="enter your email..."
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    disabled={loading}
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-agentic-lime/50 focus:bg-white/10 transition-all font-mono text-sm"
+                                />
+                                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-agentic-lime/20 to-deep-jungle/20 opacity-0 group-hover:opacity-100 -z-10 blur-xl transition-opacity duration-500" />
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="w-full bg-white text-black rounded-xl py-4 font-bold uppercase tracking-[0.2em] text-xs hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_50px_rgba(255,255,255,0.2)]"
+                            >
+                                {loading ? (
+                                    <span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                                ) : (
+                                    <>
+                                        Join Waitlist <ArrowRight className="w-4 h-4" />
+                                    </>
+                                )}
+                            </button>
+
+
+                        </form>
+                    )}
+                </div>
+            </main>
+
+
         </div>
-      ))}
-    </div>
-
-    <button
-      onClick={onClick}
-      className={`mt-auto w-full flex items-center justify-center gap-2 py-4 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all ${primary ? "bg-forest-contrast text-cyber-cream hover:bg-forest-contrast/90" : "bg-deep-jungle text-cyber-cream hover:bg-forest-contrast"}`}
-    >
-      {cta} <ArrowRight className="w-3 h-3" />
-    </button>
-  </div>
-);
-
-export default function LandingPage() {
-  const router = useRouter();
-  const { merchant } = useStore();
-
-
-  return (
-    <div className="w-full mx-auto pt-4 pb-24">
-      {/* Hero Section */}
-      <div className="text-center mb-32 relative py-20 px-6 rounded-[3rem] overflow-hidden">
-        <div className="absolute inset-0 dither-mesh opacity-[0.05] pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,#274029_0%,transparent_60%)] opacity-[0.1] pointer-events-none"></div>
-
-        <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-contrast/5 border border-forest-contrast/10 text-forest-contrast text-[9px] font-bold uppercase tracking-widest mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-agentic-lime animate-pulse"></span>
-            Infrastructure powering Merchants to Build AI-Native Storefronts
-          </div>
-          <h1 className="text-5xl md:text-7xl font-display text-deep-jungle mb-10 leading-[0.85] tracking-tighter max-w-5xl mx-auto uppercase">
-            Turn Any Inventory into an<br />
-            <span className="text-accent-contrast select-none">AI-Accessible API</span>
-          </h1>
-          <p className="text-forest-contrast text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12 uppercase tracking-tight font-medium">
-            No e-commerce platform? No problem. Works with spreadsheets,
-            databases, or manual entry. Let AI agents find and buy your products.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <button
-              onClick={() => router.push("/onboarding")}
-              className="px-12 py-5 bg-forest-contrast text-cyber-cream rounded-xl text-[11px] font-bold uppercase tracking-[0.4em] hover:scale-105 transition-all shadow-2xl whitespace-nowrap flex items-center gap-2"
-            >
-              Start Onboarding <ArrowRight className="w-3 h-3" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* How it Works */}
-      <div className="mb-32">
-        <h2 className="text-3xl font-display text-center mb-20 uppercase tracking-tight">
-          The 3-Step Success Path
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-          {[
-            {
-              icon: UploadCloud,
-              title: "1. Upload Your Data",
-              desc: "Connect your Google Sheet, upload a CSV, or just type it in manually.",
-            },
-            {
-              icon: Zap,
-              title: "2. Generate Your Server",
-              desc: "We scan your inventory and instantly build a high-performance MCP server.",
-            },
-            {
-              icon: MessageSquare,
-              title: "3. AI agents find you",
-              desc: "AI agents (Claude, ChatGPT) can now browse and purchase from your catalog.",
-            },
-          ].map((step, i) => (
-            <div key={i} className="text-center group">
-              <div className="w-20 h-20 bg-forest-contrast/5 rounded-3xl flex items-center justify-center border border-forest-contrast/5 mb-8 mx-auto group-hover:scale-110 group-hover:border-agentic-lime transition-all duration-300">
-                <step.icon className="w-8 h-8 text-deep-jungle/40 group-hover:text-deep-jungle transition-colors" />
-              </div>
-              <h3 className="font-display text-xl mb-4 uppercase tracking-tight">{step.title}</h3>
-              <p className="text-forest-contrast text-[11px] font-bold uppercase tracking-tight leading-relaxed max-w-[240px] mx-auto">
-                {step.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Two Paths Section */}
-      <div className="mb-32 bg-slate-100/50 px-4 py-12 rounded-[2.5rem] border border-slate-200/60">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-display mb-4">
-            Choose Your Path to Agentic Commerce
-          </h2>
-          <p className="text-slate-500">
-            Tailored experiences for every business type.
-          </p>
-        </div>
-
-        <div className="flex justify-center w-full mx-auto">
-          <PathCard
-            primary
-            title="I Have a Website"
-            subtitle="Transform your existing site into an Agentic API using WebMCP."
-            features={[
-              "WebMCP Protocol Injection",
-              "Universal Compatibility",
-              "Connect any HTML/React/Next.js site",
-              "Real-time Inventory Sync",
-            ]}
-            cta="Start Onboarding"
-            onClick={() => router.push("/onboarding")}
-          />
-        </div>
-      </div>
-
-      {/* Use Cases */}
-      <div className="mb-24">
-        <div className="flex items-center justify-between mb-12">
-          <h2 className="text-3xl font-display">Infinite Use Cases</h2>
-          <div className="h-px flex-1 bg-slate-200 mx-8 hidden md:block" />
-        </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <UseCase icon={UtensilsCrossed} text="Restaurants" />
-          <UseCase icon={Store} text="Local Retail" />
-          <UseCase icon={Scissors} text="Services" />
-          <UseCase icon={Briefcase} text="B2B Catalog" />
-        </div>
-      </div>
-
-      {/* Trust Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {[
-          {
-            icon: ShieldCheck,
-            title: "Institutional Security",
-            desc: "Enterprise-grade data protection and encrypted commerce links.",
-          },
-          {
-            icon: Zap,
-            title: "Lightning Fast Sync",
-            desc: "Real-time updates ensure AI agents always see accurate inventory.",
-          },
-          {
-            icon: BarChart3,
-            title: "Advanced Metrics",
-            desc: "Track every agent query and transaction with precision analytics.",
-          },
-        ].map((feat, i) => (
-          <div
-            key={i}
-            className="p-8 bg-white rounded-2xl border border-slate-100 shadow-sm"
-          >
-            <feat.icon className="w-6 h-6 text-forest-contrast mb-4" />
-            <h4 className="font-bold text-lg mb-2">{feat.title}</h4>
-            <p className="text-slate-500 text-sm leading-relaxed">
-              {feat.desc}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    );
 }

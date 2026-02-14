@@ -33,20 +33,21 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const store = getActiveStore();
+    if (!store) return;
     const config = store.apiConfig;
 
     if (config?.enabled && config.url && config.mappings) {
       console.log(`[SyncProvider] Starting sync for ${store.name} at ${config.url}`);
-      
+
       const performSync = async () => {
         try {
           console.log(`[SyncProvider] Polling API: ${config.url}`);
           const response = await fetch(config.url, { headers: config.headers });
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          
+
           const rawData = await response.json();
           const items = Array.isArray(rawData) ? rawData : (rawData.items || rawData.products || rawData.data || []);
-          
+
           if (Array.isArray(items)) {
             const products: Product[] = items.map((row: any, i: number) => ({
               id: row[config.mappings!['sku']] || row['sku'] || row['ID'] || `item-${i}`,
@@ -57,7 +58,7 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
               stock: parseInt(row[config.mappings!['stock']]?.toString().replace(/[^0-9]/g, '') || '100'),
               description: row[config.mappings!['description']] || ''
             }));
-            
+
             updateInventory(products);
             console.log(`[SyncProvider] Successfully synced ${products.length} items`);
           }

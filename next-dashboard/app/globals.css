@@ -327,16 +327,16 @@ body {
   .site-footer {
     background-color: var(--footer-bg);
     color: #ffffff;
-    padding: calc(var(--space) * 2) var(--padding) calc(var(--space) * 1);
+    padding: var(--space) var(--padding);
     position: relative;
     overflow: hidden;
-    min-height: 350px;
+    min-height: auto;
   }
 
   @media (min-width: 769px) {
     .site-footer {
-      padding: calc(var(--space) * 3) var(--padding) calc(var(--space) * 2);
-      min-height: 600px;
+      padding: calc(var(--space) * 2) var(--padding);
+      min-height: auto;
     }
   }
 

@@ -24,12 +24,12 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { num: "01", label: "Dashboard", href: "/dashboard", icon: <ChartBar weight="regular" className="w-4 h-4" /> },
-  { num: "02", label: "Integrate Storefront", href: "/connect-repo", icon: <GitBranch weight="regular" className="w-4 h-4" /> },
-  { num: "03", label: "Data Hub", href: "/data", icon: <Database weight="regular" className="w-4 h-4" /> },
-  { num: "04", label: "Platforms", href: "/platforms", icon: <Plugs weight="regular" className="w-4 h-4" /> },
-  { num: "05", label: "Agent Console", href: "/test-agent", icon: <Robot weight="regular" className="w-4 h-4" /> },
-  { num: "06", label: "Settings", href: "/settings", icon: <GearSix weight="regular" className="w-4 h-4" /> },
+  { num: "01", label: "Dashboard", href: "/demo/dashboard", icon: <ChartBar weight="regular" className="w-4 h-4" /> },
+  { num: "02", label: "Integrate Storefront", href: "/demo/connect-repo", icon: <GitBranch weight="regular" className="w-4 h-4" /> },
+  { num: "03", label: "Data Hub", href: "/demo/data", icon: <Database weight="regular" className="w-4 h-4" /> },
+  { num: "04", label: "Platforms", href: "/demo/platforms", icon: <Plugs weight="regular" className="w-4 h-4" /> },
+  { num: "05", label: "Agent Console", href: "/demo/test-agent", icon: <Robot weight="regular" className="w-4 h-4" /> },
+  { num: "06", label: "Settings", href: "/demo/settings", icon: <GearSix weight="regular" className="w-4 h-4" /> },
 ];
 
 interface AppSidebarProps {
@@ -42,7 +42,7 @@ export function AppSidebar({ className = "" }: AppSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const isActive = (href: string) => {
-    if (href === "/dashboard") return pathname === "/dashboard";
+    if (href === "/demo/dashboard") return pathname === "/demo/dashboard";
     return pathname.startsWith(href);
   };
 
@@ -58,7 +58,7 @@ export function AppSidebar({ className = "" }: AppSidebarProps) {
     <>
       {/* Logo */}
       <div className="px-5 pt-6 pb-4">
-        <Link href="/dashboard" className="block">
+        <Link href="/demo/dashboard" className="block">
           <span className="font-display text-xl tracking-tight text-[var(--cream)]">
             COMMERCEHUB
           </span>
