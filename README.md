@@ -78,3 +78,20 @@ The dashboard will be available at [http://localhost:3000](http://localhost:3000
 1.  Open the dashboard to upload your inventory data.
 2.  The system will generate an MCP server for your inventory.
 3.  AI agents can then connect to this server to query products and place orders.
+
+---
+
+## WebMCP Demos (Agentic Commerce)
+
+This repository includes a suite of demos showing how to make **any website** AI-Agent ready using WebMCP.
+
+| Demo | Path | Description |
+| :--- | :--- | :--- |
+| **1. Basic POC** | `webmcp_poc/` | Simple HTML site with WebMCP built-in. |
+| **2. Converter Tool** | `webmcp_demo/` | Tool to auto-transform static sites. |
+| **3. Universal Bridge** | `webmcp_complex_demo/` | Bridging complex React/Stateful apps. |
+| **4. AI Configurator** | `webmcp_advanced_demo/` | **Gemini 2.5** analyzes legacy code to generate adapters. |
+| **5. Network Interceptor** | `webmcp_network_demo/` | Captures data from `fetch()` calls (Backend Agnostic). |
+| **6. Large Codebase** | `webmcp_large_demo/` | Handles multi-file apps via Context Bundling. |
+
+See `walkthrough.md` for full verification details.

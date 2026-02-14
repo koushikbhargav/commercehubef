@@ -38,7 +38,7 @@ const PathCard = ({
   onClick,
 }: any) => (
   <div
-    className={`flex flex-col p-8 rounded-2xl border transition-all duration-300 hover:shadow-2xl ${primary ? "border-forest-contrast/50 bg-forest-contrast/5" : "border-forest-contrast/10 bg-transparent hover:border-forest-contrast/20"}`}
+    className={`w-full flex flex-col p-8 rounded-2xl border transition-all duration-300 hover:shadow-2xl ${primary ? "border-forest-contrast/50 bg-forest-contrast/5" : "border-forest-contrast/10 bg-transparent hover:border-forest-contrast/20"}`}
   >
     <div className="flex items-center gap-3 mb-4">
       <div
@@ -89,18 +89,19 @@ export default function LandingPage() {
 
 
   return (
-    <div className="max-w-6xl mx-auto pt-12 pb-24">
+    <div className="w-full mx-auto pt-4 pb-24">
       {/* Hero Section */}
       <div className="text-center mb-32 relative py-20 px-6 rounded-[3rem] overflow-hidden">
         <div className="absolute inset-0 dither-mesh opacity-[0.05] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,#274029_0%,transparent_60%)] opacity-[0.1] pointer-events-none"></div>
-        
+
         <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-forest-contrast/10 border border-forest-contrast/20 text-deep-jungle text-[10px] font-bold mb-8 uppercase tracking-[0.4em]">
-            <Sparkles className="w-3 h-3 text-forest-contrast" /> Agentic Commerce OS
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-contrast/5 border border-forest-contrast/10 text-forest-contrast text-[9px] font-bold uppercase tracking-widest mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-agentic-lime animate-pulse"></span>
+            Infrastructure powering Merchants to Build AI-Native Storefronts
           </div>
-          <h1 className="text-7xl md:text-9xl font-display text-deep-jungle mb-10 leading-[0.85] tracking-tighter max-w-5xl mx-auto uppercase">
-            Turn Any Inventory into an<br/>
+          <h1 className="text-5xl md:text-7xl font-display text-deep-jungle mb-10 leading-[0.85] tracking-tighter max-w-5xl mx-auto uppercase">
+            Turn Any Inventory into an<br />
             <span className="text-accent-contrast select-none">AI-Accessible API</span>
           </h1>
           <p className="text-forest-contrast text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12 uppercase tracking-tight font-medium">
@@ -155,7 +156,7 @@ export default function LandingPage() {
       </div>
 
       {/* Two Paths Section */}
-      <div className="mb-32 bg-slate-100/50 p-12 rounded-[2.5rem] border border-slate-200/60">
+      <div className="mb-32 bg-slate-100/50 px-4 py-12 rounded-[2.5rem] border border-slate-200/60">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-display mb-4">
             Choose Your Path to Agentic Commerce
@@ -165,28 +166,16 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="flex justify-center w-full mx-auto">
           <PathCard
             primary
-            title="I Have Data"
-            subtitle="Perfect for restaurants, local shops, and service providers who use spreadsheets or manual records."
+            title="I Have a Website"
+            subtitle="Transform your existing site into an Agentic API using WebMCP."
             features={[
-              "Connect Google Sheets with one click",
-              "Upload Excel or CSV files",
-              "Airtable integration",
-              "Manual item-by-item entry",
-            ]}
-            cta="Start Onboarding"
-            onClick={() => router.push("/onboarding")}
-          />
-          <PathCard
-            title="I Have an Online Store"
-            subtitle="Direct connection for established e-commerce brands looking for deeper integration."
-            features={[
-              "Native Shopify OAuth flow",
-              "WooCommerce API integration",
-              "Standardized Custom API schema",
-              "Real-time inventory syncing",
+              "WebMCP Protocol Injection",
+              "Universal Compatibility",
+              "Connect any HTML/React/Next.js site",
+              "Real-time Inventory Sync",
             ]}
             cta="Start Onboarding"
             onClick={() => router.push("/onboarding")}

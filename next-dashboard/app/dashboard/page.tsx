@@ -32,7 +32,7 @@ export default function Dashboard() {
   const router = useRouter();
   const { getActiveStore, merchant } = useStore();
   const store = getActiveStore();
-  const mcpUrl = `mcp://${store.domain || store.id + '.halofy.ai'}`;
+  const mcpUrl = `mcp://${store.domain || store.id + '.commercehub.ai'}`;
   const [activeAgent, setActiveAgent] = useState('claude');
   const [downloading, setDownloading] = useState(false);
 
@@ -62,7 +62,7 @@ export default function Dashboard() {
         mcpServers: {
           [store.id]: {
             command: 'npx',
-            args: ['-y', `@halofy/${store.id}-mcp-server`]
+            args: ['-y', `@commercehub/${store.id}-mcp-server`]
           }
         }
       },
@@ -121,7 +121,7 @@ export default function Dashboard() {
         servers: {
           [store.id]: {
             command: 'npx',
-            args: ['-y', `@halofy/${store.id}-mcp-server`]
+            args: ['-y', `@commercehub/${store.id}-mcp-server`]
           }
         }
       },
@@ -140,7 +140,7 @@ export default function Dashboard() {
         mcpServers: {
           [store.id]: {
             command: 'npx',
-            args: ['-y', `@halofy/${store.id}-mcp-server`]
+            args: ['-y', `@commercehub/${store.id}-mcp-server`]
           }
         }
       },
@@ -148,7 +148,7 @@ export default function Dashboard() {
         'Open Cursor → Settings → MCP.',
         'Click "Add new global MCP server".',
         'Paste the JSON config below.',
-        'Restart Cursor to see your Halofy tools.'
+        'Restart Cursor to see your CommerceHub tools.'
       ]
     }
   };
@@ -208,11 +208,11 @@ export default function Dashboard() {
         <div className="absolute bottom-0 left-0 right-0 bg-sage-light/30 backdrop-blur-md border-t border-brand-green/10 py-4 px-8 flex justify-center gap-12 overflow-hidden">
           <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-green/60">
             <ShieldCheck className="w-4 h-4 text-brand-green" />
-            Node ID: <span className="text-brand-green">{store.id}-halofy-mainnet</span>
+            Node ID: <span className="text-brand-green">{store.id}-commercehub-mainnet</span>
           </div>
           <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-green/60">
             <Globe className="w-4 h-4 text-brand-green" />
-            Registry: <span className="text-brand-green">Halo Universal Central</span>
+            Registry: <span className="text-brand-green">CommerceHub Universal Central</span>
           </div>
           <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-green/60">
             <Terminal className="w-4 h-4 text-brand-green" />
@@ -347,13 +347,13 @@ export default function Dashboard() {
           />
           <DeploymentCard
             label="Universal Checkout Flow"
-            value={`https://pay.halofy.ai/${store.id}`}
+            value={`https://pay.commercehub.ai/${store.id}`}
             icon={CreditCard}
             description="Agentic payment execution link. Settlement happens automatically via UCP protocol."
           />
           <DeploymentCard
             label="Inventory Agent API"
-            value={`https://api.halofy.ai/v1/${store.id}/mcp`}
+            value={`https://api.commercehub.ai/v1/${store.id}/mcp`}
             icon={Code}
             description="Secure REST endpoint for manual system integrations and headless orchestration."
           />

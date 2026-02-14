@@ -46,7 +46,7 @@ function OnboardingContent() {
           return;
         }
       }
-      
+
       if (merchant.user && step === 1) {
         handleStepChange(2);
       }
@@ -65,7 +65,7 @@ function OnboardingContent() {
           <Sparkles className="w-3 h-3 text-forest-contrast" /> Merchant Onboarding
         </div>
         <h1 className="text-4xl font-display uppercase tracking-tight text-deep-jungle mb-4">
-          Welcome to Halo
+          Welcome to CommerceHub
         </h1>
         <p className="text-forest-contrast text-sm font-medium uppercase tracking-tight">
           Complete these steps to activate your Agentic Commerce interface.
@@ -77,27 +77,26 @@ function OnboardingContent() {
         <div className="flex items-center justify-between relative">
           {/* Connector Line */}
           <div className="absolute top-5 left-0 w-full h-[2px] bg-forest-contrast/5 z-0">
-            <div 
-              className="h-full bg-forest-secondary transition-all duration-700 ease-in-out" 
+            <div
+              className="h-full bg-forest-secondary transition-all duration-700 ease-in-out"
               style={{ width: `${((step - 1) / (steps.length - 1)) * 100}%` }}
             ></div>
           </div>
 
           {steps.map((s) => {
             const isCompleted = s.id < step;
-            
+
             const isActive = step === s.id;
 
             return (
               <div key={s.id} className="relative z-10 flex flex-col items-center gap-4">
-                <div 
-                  className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${
-                    isCompleted && !isActive
-                      ? "bg-forest-secondary border-forest-secondary text-cyber-cream shadow-none" 
-                      : isActive 
-                        ? "bg-cyber-cream border-forest-contrast text-deep-jungle shadow-xl shadow-forest-contrast/10 ring-4 ring-forest-contrast/5" 
-                        : "bg-cyber-cream border-forest-contrast/10 text-forest-contrast/30"
-                  }`}
+                <div
+                  className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${isCompleted && !isActive
+                    ? "bg-forest-secondary border-forest-secondary text-cyber-cream shadow-none"
+                    : isActive
+                      ? "bg-cyber-cream border-forest-contrast text-deep-jungle shadow-xl shadow-forest-contrast/10 ring-4 ring-forest-contrast/5"
+                      : "bg-cyber-cream border-forest-contrast/10 text-forest-contrast/30"
+                    }`}
                 >
                   {isCompleted && !isActive ? (
                     <Check className="w-5 h-5" strokeWidth={3} />
@@ -106,9 +105,8 @@ function OnboardingContent() {
                   )}
                 </div>
                 <div className="absolute top-14 left-1/2 -translate-x-1/2 w-32 text-center">
-                  <span className={`text-[9px] font-bold uppercase tracking-[0.2em] block transition-colors duration-300 ${
-                    isActive ? "text-deep-jungle" : "text-forest-contrast/40"
-                  }`}>
+                  <span className={`text-[9px] font-bold uppercase tracking-[0.2em] block transition-colors duration-300 ${isActive ? "text-deep-jungle" : "text-forest-contrast/40"
+                    }`}>
                     {s.title}
                   </span>
                 </div>
@@ -124,21 +122,21 @@ function OnboardingContent() {
           <AuthStep onNext={() => handleStepChange(2)} />
         )}
         {step === 2 && (
-          <OrgProfileStep 
-            onNext={() => handleStepChange(3)} 
-            onBack={() => handleStepChange(1)} 
+          <OrgProfileStep
+            onNext={() => handleStepChange(3)}
+            onBack={() => handleStepChange(1)}
           />
         )}
         {step === 3 && (
-          <VerificationStep 
-            onNext={() => handleStepChange(4)} 
-            onBack={() => handleStepChange(2)} 
+          <VerificationStep
+            onNext={() => handleStepChange(4)}
+            onBack={() => handleStepChange(2)}
           />
         )}
         {step === 4 && (
-          <StoreConnectStep 
-            onComplete={handleComplete} 
-            onBack={() => handleStepChange(3)} 
+          <StoreConnectStep
+            onComplete={handleComplete}
+            onBack={() => handleStepChange(3)}
           />
         )}
       </div>

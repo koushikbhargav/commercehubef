@@ -158,11 +158,11 @@ type StoreState = {
   setCredentials: (credentials: Record<string, string>) => void;
   updateInventory: (items: Product[]) => void;
   syncToBackend: (productId: string, newStock: number) => Promise<boolean>;
-  
+
   // Login Modal State
   isLoginModalOpen: boolean;
   setLoginModalOpen: (open: boolean) => void;
-  
+
   // Merchant Actions
   login: (user: MerchantUser) => void;
   updateOrg: (org: Organization) => void;
@@ -179,15 +179,25 @@ export const useStore = create<StoreState>()(
       activeStoreId: 'sarah', // Default
       stores: MOCK_STORES,   // Initialize with mock data
       merchant: {
-        user: null,
-        org: null,
+        user: {
+          id: 'mock-user-123',
+          name: 'Sarah Jenkins',
+          email: 'sarah@boutique.com',
+          role: 'owner',
+          authMethod: 'email'
+        },
+        org: {
+          name: "Sarah's Boutique",
+          industry: "Fashion",
+          contactEmail: "sarah@boutique.com"
+        },
         branding: {
           primaryColor: 'forest-contrast',
           brandVoice: 'Professional, Efficient, Secure',
           brandGuidelines: ''
         },
-        verificationStatus: 'unverified',
-        isOnboarded: false,
+        verificationStatus: 'verified',
+        isOnboarded: true,
       },
       isLoginModalOpen: false,
       setLoginModalOpen: (open) => set({ isLoginModalOpen: open }),
@@ -337,7 +347,7 @@ export const useStore = create<StoreState>()(
           return false;
         }
       },
-      
+
       // Merchant Actions Implementation
       login: (user) => set((state) => ({
         merchant: { ...state.merchant, user }

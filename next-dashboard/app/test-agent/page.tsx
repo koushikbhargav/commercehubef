@@ -2,16 +2,16 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { 
-  ArrowLeft, 
-  Send, 
-  Bot, 
-  User, 
-  Sparkles, 
-  Terminal, 
+import {
+  ArrowLeft,
+  Send,
+  Bot,
+  User,
+  Sparkles,
+  Terminal,
   ShoppingBag,
   Zap,
-  RefreshCw 
+  RefreshCw
 } from 'lucide-react';
 import { useStore } from '@/app/lib/store';
 
@@ -44,11 +44,11 @@ export default function TestAgent() {
 
     // Dynamic response based on active store
     const response = generateMockResponse(query, store);
-    
+
     // Stream the text response
     let currentText = '';
     const fullText = response.text;
-    
+
     // Add initial empty message
     setMessages(prev => [...prev, { ...response, text: '' }]);
     setLoading(false);
@@ -79,7 +79,7 @@ export default function TestAgent() {
     <div className="max-w-4xl mx-auto h-[calc(100vh-10rem)] flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-1000">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-forest-contrast/10 pb-8">
         <div>
-          <button 
+          <button
             onClick={() => router.push('/dashboard')}
             className="flex items-center text-[9px] font-bold uppercase tracking-[0.3em] text-forest-contrast/40 hover:text-deep-jungle transition-all group mb-4"
           >
@@ -99,7 +99,7 @@ export default function TestAgent() {
 
       <div className="flex-1 bg-white border border-forest-contrast/10 rounded-[2rem] shadow-2xl flex flex-col overflow-hidden relative">
         <div className="absolute inset-0 dither-mesh opacity-[0.02] pointer-events-none"></div>
-        
+
         {/* Chat Header */}
         <div className="px-10 py-6 border-b border-forest-contrast/10 flex items-center justify-between bg-deep-jungle text-cyber-cream relative z-10">
           <div className="flex items-center gap-4">
@@ -107,7 +107,7 @@ export default function TestAgent() {
               <Bot className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-sm font-bold uppercase tracking-[0.2em]">HALO_ORCHESTRATOR</h3>
+              <h3 className="text-sm font-bold uppercase tracking-[0.2em]">COMMERCEHUB_ORCHESTRATOR</h3>
               <p className="text-[8px] text-agentic-lime font-bold uppercase tracking-[0.4em]">Simulation Active</p>
             </div>
           </div>
@@ -134,11 +134,10 @@ export default function TestAgent() {
 
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
-              <div className={`max-w-[90%] md:max-w-[70%] border ${
-                msg.role === 'user' 
-                  ? 'bg-deep-jungle text-cyber-cream border-deep-jungle rounded-[1.5rem] rounded-tr-none' 
+              <div className={`max-w-[90%] md:max-w-[70%] border ${msg.role === 'user'
+                  ? 'bg-deep-jungle text-cyber-cream border-deep-jungle rounded-[1.5rem] rounded-tr-none'
                   : 'bg-white border-forest-contrast/10 shadow-lg rounded-[1.5rem] rounded-tl-none'
-              } p-6`}>
+                } p-6`}>
                 {msg.role === 'agent' && (
                   <div className="flex items-center gap-2 mb-4 text-[9px] font-bold text-agentic-lime uppercase tracking-[0.4em]">
                     <Zap className="w-3 h-3" /> AGENT_RESULT
@@ -205,7 +204,7 @@ export default function TestAgent() {
               placeholder="INITIATE PROTOCOL CONVERSATION..."
               className="flex-1 px-8 py-5 bg-white border border-forest-contrast/10 rounded-2xl focus:outline-none focus:border-agentic-lime focus:shadow-[0_0_20px_rgba(234,255,148,0.1)] transition-all outline-none font-bold uppercase tracking-widest text-[10px]"
             />
-            <button 
+            <button
               type="submit"
               disabled={!query.trim() || loading}
               className="px-10 bg-deep-jungle text-agentic-lime rounded-2xl hover:scale-[1.02] active:scale-[0.98] disabled:opacity-20 transition-all font-bold uppercase tracking-[0.2em] text-[10px]"
@@ -221,7 +220,7 @@ export default function TestAgent() {
 
 function ExampleBtn({ text, onClick }: { text: string, onClick: () => void }) {
   return (
-    <button 
+    <button
       onClick={onClick}
       className="px-5 py-3 bg-white border border-forest-contrast/10 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] text-forest-contrast/60 hover:border-agentic-lime hover:text-deep-jungle hover:shadow-xl transition-all"
     >

@@ -2,22 +2,22 @@
 import { StoreData } from '../store';
 
 export const snapshotTemplate = (store: StoreData) => {
-    const packageJson = {
-        name: `mcp-server-${store.id}`,
-        version: "1.0.0",
-        type: "module",
-        scripts: {
-            "start": "node index.js",
-            "refresh": "node scripts/refresh-data.js"
-        },
-        dependencies: {
-            "@modelcontextprotocol/sdk": "^0.6.0",
-            "zod": "^3.22.4",
-            "node-fetch": "^3.3.2" // Added for refresh script
-        }
-    };
+  const packageJson = {
+    name: `mcp-server-${store.id}`,
+    version: "1.0.0",
+    type: "module",
+    scripts: {
+      "start": "node index.js",
+      "refresh": "node scripts/refresh-data.js"
+    },
+    dependencies: {
+      "@modelcontextprotocol/sdk": "^0.6.0",
+      "zod": "^3.22.4",
+      "node-fetch": "^3.3.2" // Added for refresh script
+    }
+  };
 
-    const readme = `# ${store.name} MCP Server (Snapshot)
+  const readme = `# ${store.name} MCP Server (Snapshot)
 
 This is an auto-generated Model Context Protocol (MCP) server for **${store.name}**.
 It uses a **static snapshot** of your inventory data.
@@ -38,7 +38,7 @@ It uses a **static snapshot** of your inventory data.
    - Go to Settings > Developer > Edit Config
    - Add this server:
      \`\`\`json
-     "halo-${store.id}": {
+     "commercehub-${store.id}": {
        "command": "node",
        "args": ["/path/to/this/directory/index.js"]
      }
@@ -55,7 +55,7 @@ Since this is a snapshot server, data is static. To update it:
 - \`get_inventory\`: Check stock level.
 `;
 
-    const indexJs = `#!/usr/bin/env node
+  const indexJs = `#!/usr/bin/env node
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
@@ -150,5 +150,5 @@ await server.connect(transport);
 console.error("${store.name} MCP Server running on stdio");
 `;
 
-    return { packageJson, readme, indexJs };
+  return { packageJson, readme, indexJs };
 };

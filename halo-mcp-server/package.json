@@ -1,7 +1,7 @@
 {
-  "name": "halo-mcp-server",
+  "name": "commercehub-mcp-server",
   "version": "1.0.0",
-  "description": "Standalone Halo MCP Server for Merchant Inventory",
+  "description": "Standalone CommerceHub MCP Server for Merchant Inventory",
   "main": "build/index.js",
   "type": "module",
   "scripts": {

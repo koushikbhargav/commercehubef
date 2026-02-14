@@ -31,7 +31,7 @@ export default function DeploymentSuccess() {
     setTimeout(() => setDownloading(false), 1000);
   };
 
-  const mcpUrl = `mcp://${store.domain?.split('.')[0] || store.id}.halofy.ai`;
+  const mcpUrl = `mcp://${store.domain?.split('.')[0] || store.id}.commercehub.ai`;
 
   const agentConfigs: Record<string, { name: string; icon: string; config: object }> = {
     claude: {
@@ -41,7 +41,7 @@ export default function DeploymentSuccess() {
         mcpServers: {
           [store.id]: {
             command: 'npx',
-            args: ['-y', `@halofy/${store.id}-mcp-server`]
+            args: ['-y', `@commercehub/${store.id}-mcp-server`]
           }
         }
       }
@@ -79,7 +79,7 @@ export default function DeploymentSuccess() {
         servers: {
           [store.id]: {
             command: 'npx',
-            args: ['-y', `@halofy/${store.id}-mcp-server`]
+            args: ['-y', `@commercehub/${store.id}-mcp-server`]
           }
         }
       }
@@ -91,7 +91,7 @@ export default function DeploymentSuccess() {
         mcpServers: {
           [store.id]: {
             command: 'npx',
-            args: ['-y', `@halofy/${store.id}-mcp-server`]
+            args: ['-y', `@commercehub/${store.id}-mcp-server`]
           }
         }
       }
@@ -147,8 +147,8 @@ export default function DeploymentSuccess() {
                 key={key}
                 onClick={() => setActiveAgent(key)}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all ${activeAgent === key
-                    ? 'bg-black text-white shadow-md'
-                    : 'text-slate-400 hover:text-slate-700 hover:bg-white/80'
+                  ? 'bg-black text-white shadow-md'
+                  : 'text-slate-400 hover:text-slate-700 hover:bg-white/80'
                   }`}
               >
                 <span>{agent.icon}</span>

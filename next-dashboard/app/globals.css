@@ -17,7 +17,8 @@
   --color-midnight: #000c38;
   --color-accent-green: #00c38a;
   --color-sage-light: #d5daad;
-  --color-forest-secondary: #316196; /* Using a blue-ish secondary or dark green? Let's use a darker forest green */
+  --color-forest-secondary: #316196;
+  /* Using a blue-ish secondary or dark green? Let's use a darker forest green */
   --color-forest-secondary: #1a2e1c;
 }
 
@@ -54,6 +55,7 @@
   --padding: clamp(1.5rem, 6vw, 4rem);
   --space: 2rem;
 }
+
 body {
   font-family: var(--font-neue-montreal);
   background-color: var(--color-cyber-cream);
@@ -69,7 +71,7 @@ body {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 1000;
+  z-index: 40;
   mix-blend-mode: overlay;
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
@@ -83,7 +85,8 @@ body {
 .dither-transition {
   position: relative;
   width: 100%;
-  height: 160px; /* Matched to SVG height */
+  height: 160px;
+  /* Matched to SVG height */
   margin-top: -1px;
   background-color: var(--background);
 }
@@ -102,7 +105,7 @@ body::after {
   inset: 0;
   box-shadow: inset 0 0 200px rgba(107, 179, 255, 0.1);
   pointer-events: none;
-  z-index: 9998;
+  z-index: 50;
 }
 
 h1,
@@ -129,16 +132,16 @@ h3,
 }
 
 @layer components {
+
   /* ============================================
      FOOTER (Halofy.ai Reference)
      ============================================ */
   .site-footer {
     background-color: var(--footer-bg);
     color: #ffffff;
-    padding: calc(var(--space) * 3) var(--padding) calc(var(--space) * 2);
+    padding: var(--space) var(--padding);
     position: relative;
     overflow: hidden;
-    min-height: 600px;
   }
 
   .footer-top {
@@ -230,7 +233,8 @@ h3,
     width: 100vw;
     margin-left: calc(-1 * var(--padding));
     margin-right: calc(-1 * var(--padding));
-    bottom: 0; /* Align to bottom */
+    bottom: 0;
+    /* Align to bottom */
   }
 
   .footer-logo-watermark {
@@ -270,20 +274,20 @@ h3,
   0% {
     background-position: 0% 0%;
   }
+
   50% {
     background-position: 100% 100%;
   }
+
   100% {
     background-position: 0% 0%;
   }
 }
 
 .dither-mesh {
-  background-image: radial-gradient(
-    circle at 1px 1px,
-    rgba(13, 31, 24, 0.1) 1px,
-    transparent 0
-  );
+  background-image: radial-gradient(circle at 1px 1px,
+      rgba(13, 31, 24, 0.1) 1px,
+      transparent 0);
   background-size: 12px 12px;
   animation: dither-float 60s infinite linear;
 }
