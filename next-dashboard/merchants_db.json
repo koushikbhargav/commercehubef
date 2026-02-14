@@ -1,0 +1,32 @@
+[
+  {
+    "id": "merchant_4koh6untn",
+    "name": "Koushik Bhargav",
+    "email": "google_user@example.com",
+    "role": "owner",
+    "authMethod": "google",
+    "createdAt": "2026-02-13T11:33:27.925Z",
+    "branding": {
+      "primaryColor": "forest-contrast",
+      "brandVoice": "Professional, Efficient, Secure",
+      "brandGuidelines": ""
+    },
+    "verificationStatus": "unverified",
+    "isOnboarded": false
+  },
+  {
+    "id": "merchant_01veqbr7q",
+    "name": "jaideep.cherukuri7@gmail.com",
+    "email": "jaideep.cherukuri7@gmail.com",
+    "role": "owner",
+    "authMethod": "email",
+    "createdAt": "2026-02-13T15:14:35.496Z",
+    "branding": {
+      "primaryColor": "forest-contrast",
+      "brandVoice": "Professional, Efficient, Secure",
+      "brandGuidelines": ""
+    },
+    "verificationStatus": "unverified",
+    "isOnboarded": false
+  }
+]

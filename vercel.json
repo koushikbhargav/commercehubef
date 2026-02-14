@@ -1,0 +1,6 @@
+{
+  "framework": "nextjs",
+  "installCommand": "npm install && cd next-dashboard && npm install",
+  "buildCommand": "cd next-dashboard && npm run build",
+  "outputDirectory": "next-dashboard/.next"
+}

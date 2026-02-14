@@ -1,0 +1,13 @@
+{
+  "name": "halo-mcp-root",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix next-dashboard",
+    "build": "npm run build --prefix next-dashboard",
+    "start": "npm run start --prefix next-dashboard",
+    "lint": "npm run lint --prefix next-dashboard"
+  },
+  "dependencies": {
+    "next": "15.1.11"
+  }
+}

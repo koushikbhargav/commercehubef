@@ -1,0 +1,293 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "PP Neue Montreal", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "FK Raster", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Halofy.ai Exact Palette */
+  --color-cyber-cream: #f4f7ee;
+  --color-deep-jungle: #0d1f18;
+  --color-agentic-lime: #274029;
+  --color-mint-glow: #94ffaf;
+  --color-forest-contrast: #274029;
+  --color-glow-blue: #6bb3ff;
+  --color-midnight: #000c38;
+  --color-accent-green: #00c38a;
+  --color-sage-light: #d5daad;
+  --color-forest-secondary: #316196; /* Using a blue-ish secondary or dark green? Let's use a darker forest green */
+  --color-forest-secondary: #1a2e1c;
+}
+
+@font-face {
+  font-family: "FK Raster Smooth";
+  src: url("/fonts/FK_Raster_Roman_Compact_Smooth.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PP_Neue_Montreal_Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PP_Neue_Montreal_Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+:root {
+  --background: #f4f7ee;
+  --foreground: #011f18;
+  --font-fk-raster: "FK Raster Smooth", monospace;
+  --font-neue-montreal: "PP Neue Montreal", sans-serif;
+
+  /* Footer Variables */
+  --footer-bg: #000000;
+  --page-width: 1280px;
+  --padding: clamp(1.5rem, 6vw, 4rem);
+  --space: 2rem;
+}
+body {
+  font-family: var(--font-neue-montreal);
+  background-color: var(--color-cyber-cream);
+  color: var(--color-deep-jungle);
+  @apply antialiased overflow-x-hidden;
+  position: relative;
+}
+
+/* ============================================
+   GLOBAL DITHER NOISE OVERLAY
+   ============================================ */
+.dither-noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  mix-blend-mode: overlay;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ============================================
+   DITHER TRANSITION - Sage to Black
+   ============================================ */
+.dither-transition {
+  position: relative;
+  width: 100%;
+  height: 160px; /* Matched to SVG height */
+  margin-top: -1px;
+  background-color: var(--background);
+}
+
+.dither-transition-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Blue Vignette Glow */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  box-shadow: inset 0 0 200px rgba(107, 179, 255, 0.1);
+  pointer-events: none;
+  z-index: 9998;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-fk-raster);
+  @apply tracking-tight uppercase leading-none;
+}
+
+/* Exact Halofy Button Replication */
+.btn-primary {
+  @apply px-6 py-3 bg-forest-contrast text-cyber-cream font-bold rounded-lg hover:bg-forest-contrast hover:text-cyber-cream transition-all duration-300 uppercase tracking-[0.3em] text-[10px] border border-forest-contrast/5;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-transparent border border-forest-contrast/10 text-deep-jungle font-bold rounded-lg hover:bg-forest-contrast hover:text-cyber-cream transition-all duration-300 uppercase tracking-[0.3em] text-[10px];
+}
+
+/* High-Contrast Readability Patch */
+.text-label-contrast {
+  color: var(--color-forest-contrast);
+  @apply font-bold uppercase tracking-[0.3em] text-[10px];
+}
+
+@layer components {
+  /* ============================================
+     FOOTER (Halofy.ai Reference)
+     ============================================ */
+  .site-footer {
+    background-color: var(--footer-bg);
+    color: #ffffff;
+    padding: calc(var(--space) * 3) var(--padding) calc(var(--space) * 2);
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: var(--page-width);
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footer-location {
+    font-family: var(--font-fk-raster);
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .footer-contact-label {
+    font-family: var(--font-fk-raster);
+    font-size: 1rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .footer-email {
+    font-family: var(--font-neue-montreal);
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+  }
+
+  .footer-email:hover {
+    color: #ffffff;
+  }
+
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: #ffffff;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+
+  .social-link:hover {
+    opacity: 1;
+  }
+
+  /* Large Footer Logo Watermark - Edge to Edge */
+  .footer-logo-container {
+    display: flex;
+    justify-content: center;
+    margin-top: calc(var(--space) * 3);
+    padding: 0;
+    position: relative;
+    z-index: 1;
+    width: 100vw;
+    margin-left: calc(-1 * var(--padding));
+    margin-right: calc(-1 * var(--padding));
+    bottom: 0; /* Align to bottom */
+  }
+
+  .footer-logo-watermark {
+    width: 100%;
+    height: auto;
+    color: rgba(255, 255, 255, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    .footer-top {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+    }
+
+    .footer-right {
+      align-items: flex-end;
+      margin-top: 0;
+    }
+  }
+}
+
+/* Minimalist Inputs */
+.halofy-input {
+  @apply bg-transparent border-b border-forest-contrast/20 py-2 focus:border-forest-contrast outline-none transition-all font-medium text-sm text-deep-jungle;
+}
+
+/* Layout Elements */
+.halofy-card {
+  @apply bg-transparent border border-forest-contrast/5 p-6 hover:border-forest-contrast/10 transition-all relative overflow-hidden;
+}
+
+/* Dither Graphics & Animations */
+@keyframes dither-float {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.dither-mesh {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(13, 31, 24, 0.1) 1px,
+    transparent 0
+  );
+  background-size: 12px 12px;
+  animation: dither-float 60s infinite linear;
+}
+
+.halofy-mesh-container {
+  @apply relative overflow-hidden bg-cyber-cream min-h-screen;
+}
