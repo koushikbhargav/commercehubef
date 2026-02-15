@@ -91,7 +91,8 @@ export default function DataManagement() {
 
 function ItemsTab() {
   const { getActiveStore, updateInventory, syncToBackend } = useStore();
-  const store = getActiveStore();
+  const rawStore = getActiveStore();
+  const store = rawStore || { id: 'my-store', name: 'Your Store', inventory: [], apiConfig: {}, source: '' } as any;
   const items = store.inventory || [];
   const [isSyncing, setIsSyncing] = useState<string | null>(null);
 
@@ -185,7 +186,8 @@ function ItemsTab() {
 
 function ConnectionTab() {
   const { getActiveStore } = useStore();
-  const store = getActiveStore();
+  const rawStore = getActiveStore();
+  const store = rawStore || { id: 'my-store', name: 'Your Store', inventory: [], apiConfig: {}, source: '' } as any;
   const isApi = store.source === 'Custom API' && store.apiConfig;
   const isSheets = store.source === 'Google Sheets';
 
@@ -256,7 +258,8 @@ function ConnectionTab() {
 
 function MappingTab() {
   const { getActiveStore } = useStore();
-  const store = getActiveStore();
+  const rawStore = getActiveStore();
+  const store = rawStore || { id: 'my-store', name: 'Your Store', apiConfig: {} } as any;
   const mappings = store.apiConfig?.mappings || {};
 
   return (

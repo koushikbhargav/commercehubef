@@ -24,7 +24,8 @@ import { CornerMarkers } from "@/app/components/ui/CornerMarkers";
 export default function TestAgent() {
   const router = useRouter();
   const { getActiveStore } = useStore();
-  const store = getActiveStore();
+  const rawStore = getActiveStore();
+  const store = rawStore || { id: 'my-store', name: 'Your Store', domain: '', stats: { products: 0 }, inventory: [], apiConfig: {} } as any;
 
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState<any[]>([]);

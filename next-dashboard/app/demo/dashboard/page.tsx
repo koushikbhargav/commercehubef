@@ -34,7 +34,8 @@ import {
 export default function Dashboard() {
   const router = useRouter();
   const { getActiveStore, merchant } = useStore();
-  const store = getActiveStore();
+  const rawStore = getActiveStore();
+  const store = rawStore || { id: 'my-store', name: 'Your Store', domain: 'my-store.commercehub.ai', stats: { products: 0, orders: 0, agents: 0 }, inventory: [], apiConfig: {}, recentActivity: [] } as any;
   const mcpUrl = `mcp://${store.domain || store.id + ".commercehub.ai"}`;
   const [activeAgent, setActiveAgent] = useState("claude");
   const [isHydrated, setIsHydrated] = useState(false);

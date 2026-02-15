@@ -10,7 +10,8 @@ import { AppLayout } from '@/app/components/ui/AppLayout';
 export default function Settings() {
   const router = useRouter();
   const { getActiveStore } = useStore();
-  const store = getActiveStore();
+  const rawStore = getActiveStore();
+  const store = rawStore || { id: 'my-store', name: 'Your Store', domain: '', stats: { products: 0 }, inventory: [], apiConfig: {} } as any;
   const [isHydrated, setIsHydrated] = React.useState(false);
 
   React.useEffect(() => {

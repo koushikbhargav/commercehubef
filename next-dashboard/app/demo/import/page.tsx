@@ -740,7 +740,7 @@ function FieldMapping({
       // If we are coming from a Custom API source, update the apiConfig in the store with these mappings
       const { getActiveStore, setApiConfig } = useStore.getState();
       const store = getActiveStore();
-      if (store.apiConfig) {
+      if (store?.apiConfig) {
         setApiConfig({
           ...store.apiConfig,
           mappings: mappings

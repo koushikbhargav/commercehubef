@@ -18,7 +18,8 @@ export default function DeploymentSuccess() {
     setIsHydrated(true);
   }, []);
 
-  const store = getActiveStore();
+  const rawStore = getActiveStore();
+  const store = rawStore || { id: 'my-store', name: 'Your Store', domain: 'my-store.example.com', stats: { products: 0 } } as any;
   const [downloading, setDownloading] = useState(false);
   const [activeAgent, setActiveAgent] = useState('claude');
   const [copied, setCopied] = useState(false);
